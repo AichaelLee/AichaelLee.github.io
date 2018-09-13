@@ -12,6 +12,6 @@
 
 您可以联系我的个人邮箱:aichaellee320@gmail.com 共同探讨进步。
 
-也可以访问 [我的个人主页 ](www.aichaellee.com)
+也可以访问 [我的个人主页 ](http://www.aichaellee.com)
 
 期待！
