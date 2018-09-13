@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>java8 新特性之 stream | 总结文档</title>
+    <meta name="description" content="学习总结">
+    <link rel="icon" href="/doc/logo.png">
+  <link rel="manifest" href="/doc/manifest.json">
+  <meta name="theme-color" content="#3eaf7c">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="apple-touch-icon" href="/doc/icons/apple-touch-icon-152x152.png">
+  <link rel="mask-icon" href="/doc/icons/safari-pinned-tab.svg" color="#3eaf7c">
+  <meta name="msapplication-TileImage" content="/icons/msapplication-icon-144x144.png">
+  <meta name="msapplication-TileColor" content="#000000">
+    
+    <link rel="preload" href="/doc/assets/css/25.styles.24c5521e.css" as="style"><link rel="preload" href="/doc/assets/js/app.68d168ff.js" as="script"><link rel="preload" href="/doc/assets/js/20.943cba34.js" as="script"><link rel="prefetch" href="/doc/assets/js/13.830f6e34.js"><link rel="prefetch" href="/doc/assets/js/1.2812101d.js"><link rel="prefetch" href="/doc/assets/js/2.6e521817.js"><link rel="prefetch" href="/doc/assets/js/3.c762db89.js"><link rel="prefetch" href="/doc/assets/js/4.7e1bd91c.js"><link rel="prefetch" href="/doc/assets/js/5.08ad72de.js"><link rel="prefetch" href="/doc/assets/js/6.800ff64d.js"><link rel="prefetch" href="/doc/assets/js/7.c22c954c.js"><link rel="prefetch" href="/doc/assets/js/8.635d1549.js"><link rel="prefetch" href="/doc/assets/js/9.f41f5bae.js"><link rel="prefetch" href="/doc/assets/js/10.2da889b8.js"><link rel="prefetch" href="/doc/assets/js/11.4dfd782c.js"><link rel="prefetch" href="/doc/assets/js/12.8c172603.js"><link rel="prefetch" href="/doc/assets/js/14.182b8d3c.js"><link rel="prefetch" href="/doc/assets/js/15.c0be08b2.js"><link rel="prefetch" href="/doc/assets/js/16.6e4a0297.js"><link rel="prefetch" href="/doc/assets/js/17.f9b5b088.js"><link rel="prefetch" href="/doc/assets/js/18.14c4c291.js"><link rel="prefetch" href="/doc/assets/js/19.34bfd256.js"><link rel="prefetch" href="/doc/assets/js/21.54a657f7.js"><link rel="prefetch" href="/doc/assets/js/22.e115f3ac.js"><link rel="prefetch" href="/doc/assets/js/23.bb421af0.js"><link rel="prefetch" href="/doc/assets/js/24.5c12790b.js">
+    <link rel="stylesheet" href="/doc/assets/css/25.styles.24c5521e.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div><a href="/doc/" class="home-link router-link-active"><!----><span class="site-name">
+      总结文档
+    </span></a><div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""><!----></div><nav class="nav-links can-hide"><div class="nav-item"><a href="/doc/java/www.aichaellee.com.html" class="nav-link">个人博客</a></div><a href="https://github.com/Aichaellee/aichaellee.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav></div></header><div class="sidebar-mask"></div><div class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/doc/java/www.aichaellee.com.html" class="nav-link">个人博客</a></div><a href="https://github.com/Aichaellee/aichaellee.github.io" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></a></nav><ul class="sidebar-links"><li><div class="sidebar-group first collapsable"><p class="sidebar-heading"><span>Heroku</span><span class="arrow right"></span></p><!----></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>开发规范</span><!----></p><ul class="sidebar-group-items"><li><a href="/doc/project/projectGuildline.html" class="sidebar-link">项目规范</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>DevOps</span><!----></p><ul class="sidebar-group-items"><li><a href="/doc/devOps/installGitlab.html" class="sidebar-link">ubuntu gitlab安装</a></li><li><a href="/doc/devOps/docker.html" class="sidebar-link">docker了解</a></li><li><a href="/doc/devOps/redis-install.html" class="sidebar-link">windows本地安装redis</a></li><li><a href="/doc/devOps/heroku-gitlab-ci.html" class="sidebar-link">Heroku与gitlab持续集成</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>前端</span><!----></p><ul class="sidebar-group-items"><li><a href="/doc/fronted/vue-interview.html" class="sidebar-link">vue面试题</a></li></ul></div></li><li><div class="sidebar-group"><p class="sidebar-heading"><span>AWS</span><!----></p><ul class="sidebar-group-items"><li><a href="/doc/fronted/vue-interview.html" class="sidebar-link">Introduction</a></li></ul></div></li><li><div class="sidebar-group collapsable"><p class="sidebar-heading open"><span>java</span><span class="arrow down"></span></p><ul class="sidebar-group-items"><li><a href="/doc/java/java-interview.html" class="sidebar-link">面试题</a></li><li><a href="/doc/java/java-stream.html" class="active sidebar-link">流操作</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/doc/java/java-stream.html#java8-新特性之-stream" class="sidebar-link">java8 新特性之 stream</a></li></ul></li><li><a href="/doc/java/http-related.html" class="sidebar-link">网络相关</a></li><li><a href="/doc/java/mybatis-related.html" class="sidebar-link">mybatis</a></li></ul></div></li></ul></div><div class="page"><div class="content"><h2 id="java8-新特性之-stream"><a href="#java8-新特性之-stream" aria-hidden="true" class="header-anchor">#</a> java8 新特性之 stream</h2><p>本篇文章主要内容：</p><ul><li>介绍 Stream 以及 Stream 是如何处理集合的</li><li>介绍 Stream 与集合的关系与区别</li><li>Stream 的基本方法介绍</li></ul><p><strong>什么是 Stream</strong>
+Stream 中文称为 “流”，通过将集合转换为这么一种叫做 “流” 的元素序列，通过<code>声明性方式</code>，能够对集合中的每个元素进行一系列并行或串行的流水线操作。</p><p>换句话说，你只需要告诉流你的要求，流便会在背后自行根据要求对元素进行处理，而你只需要 “坐享其成”。</p><p><strong>流操作</strong></p><p>整个流操作就是一条流水线，将元素放在流水线上一个个地进行处理。</p><p>其中数据源便是原始集合，然后将如 List的集合转换为 Stream类型的流，并对流进行一系列的中间操作，比如<code>过滤保留部分元素</code>、<code>对元素进行排序</code>、<code>类型转换</code>等；最后再进行一个终端操作，可以把 Stream 转换回集合类型，也可以直接对其中的各个元素进行处理，比如打印、比如计算总数、计算最大值等等</p><p>很重要的一点是，很多流操作本身就会返回一个流，所以多个操作可以直接连接起来，我们来看看一条 Stream 操作的代码：</p><p>如果是以前，进行这么一系列操作，你需要做个迭代器或者 foreach 循环，然后遍历，一步步地亲力亲为地去完成这些操作；但是如果使用流，你便可以直接声明式地下指令，流会帮你完成这些操作。</p><p>有没有想到什么类似的？是的，就像 SQL 语句一样， select username from user where id = 1，你只要说明：“我需要 id 是 1 （id = 1）的用户（user）的用户名（username ）”，那么就可以得到自己想要的数据，而不需要自己亲自去数据库里面循环遍历查找。</p><p><strong>流与集合</strong></p><p>什么时候计算</p><p>Stream 和集合的其中一个差异在于什么时候进行计算。</p><p>一个集合，它会包含当前数据结构中所有的值，你可以随时增删，但是集合里面的元素毫无疑问地都是已经计算好了的。</p><p><code>流则是按需计算</code>，按照使用者的需要计算数据，你可以想象我们通过搜索引擎进行搜索，搜索出来的条目并不是全部呈现出来的，而且先显示最符合的前 10 条或者前 20 条，只有在点击 “下一页” 的时候，才会再输出新的 10 条。</p><p>再比方在线观看电影和你硬盘里面的电影，也是差不多的道理。</p><p>外部迭代和内部迭代
+Stream 和集合的另一个差异在于迭代。</p><p>我们可以把集合比作一个工厂的仓库，一开始工厂比较落后，要对货物作什么修改，只能工人亲自走进仓库对货物进行处理，有时候还要将处理后的货物放到一个新的仓库里面。在这个时期，我们需要亲自去做迭代，一个个地找到需要的货物，并进行处理，这叫做外部迭代。</p><p>后来工厂发展了起来，配备了流水线作业，只要根据需求设计出相应的流水线，然后工人只要把货物放到流水线上，就可以等着接收成果了，而且流水线还可以根据要求直接把货物输送到相应的仓库。</p><p>这就叫做内部迭代，流水线已经帮你把迭代给完成了，你只需要说要干什么就可以了（即设计出合理的流水线）。</p><p>Java 8 引入 Stream 很大程度是因为，流的内部迭代可以自动选择一种合适你硬件的数据表示和并行实现；而以往程序员自己进行 foreach 之类的时候，则需要自己去管理并行等问题。</p><p><strong>一次性的流</strong></p><p>流和迭代器类似，只能迭代一次。</p><div class="language- extra-class"><pre class="language-text"><code>Stream&lt;String&gt; stream = list.stream().map(Person::getName).sorted().limit(10);         
+List&lt;String&gt; newList = stream.collect(toList());
+List&lt;String&gt; newList2 = stream.collect(toList());
+</code></pre></div><p>上面代码中第三行会报错，因为第二行已经使用过这个流，这个流已经被消费掉了</p><p>四. 方法介绍，开始实战
+首先我们先创建一个 Person 泛型的 List</p><div class="language- extra-class"><pre class="language-text"><code>List&lt;Person&gt; list = new ArrayList&lt;&gt;();
+list.add(new Person(&quot;jack&quot;, 20));
+list.add(new Person(&quot;mike&quot;, 25));
+list.add(new Person(&quot;tom&quot;, 30));
+</code></pre></div><p>Person 类包含年龄和姓名两个成员变量</p><div class="language- extra-class"><pre class="language-text"><code>private String name;
+privateint age;
+</code></pre></div><ol><li>stream() / parallelStream()
+最常用到的方法，将集合转换为流</li></ol><div class="language- extra-class"><pre class="language-text"><code>Listlist = new ArrayList();
+// return Stream&lt;E&gt;
+list.stream();
+</code></pre></div><p>而 parallelStream() 是并行流方法，能够让数据集执行并行操作，后面会更详细地讲解</p><ol start="2"><li>filter(T -&gt; boolean)
+保留 boolean 为 true 的元素
+保留年龄为 20 的 person 元素</li></ol><div class="language- extra-class"><pre class="language-text"><code>list = list.stream()
+            .filter(person -&gt; person.getAge() == 20)
+            .collect(toList());
+</code></pre></div><p>打印输出 [Person{name='jack', age=20}]
+collect(toList()) 可以把流转换为 List 类型，这个以后会讲解</p><ol start="3"><li>distinct()
+去除重复元素，这个方法是通过类的 equals 方法来判断两个元素是否相等的</li></ol><p>如例子中的 Person 类，需要先定义好 equals 方法，不然类似[Person{name='jack', age=20}, Person{name='jack', age=20}] 这样的情况是不会处理的</p><ol start="4"><li>sorted() / sorted((T, T) -&gt; int)
+如果流中的元素的类实现了 Comparable 接口，即有自己的排序规则，那么可以直接调用 sorted() 方法对元素进行排序，如 Stream</li></ol><p>反之, 需要调用 sorted((T, T) -&gt; int) 实现 Comparator 接口
+根据年龄大小来比较：</p><div class="language- extra-class"><pre class="language-text"><code>list = list.stream()
+           .sorted((p1, p2) -&gt; p1.getAge() - p2.getAge())
+           .collect(toList());
+</code></pre></div><p>当然这个可以简化为</p><div class="language- extra-class"><pre class="language-text"><code>list = list.stream()
+           .sorted(Comparator.comparingInt(Person::getAge))
+           .collect(toList());
+</code></pre></div><ol start="5"><li>limit(long n)
+返回前 n 个元素</li></ol><div class="language- extra-class"><pre class="language-text"><code>list = list.stream()
+            .limit(2)
+            .collect(toList());
+</code></pre></div><p>打印输出 [Person{name='jack', age=20}, Person{name='mike', age=25}]</p><ol start="6"><li>skip(long n)
+去除前 n 个元素</li></ol><div class="language- extra-class"><pre class="language-text"><code>list = list.stream()
+            .skip(2)
+            .collect(toList());
+</code></pre></div><p>打印输出 [Person{name='tom', age=30}]</p><p>tips:</p><ul><li>用在 limit(n) 前面时，先去除前 m 个元素再返回剩余元素的前 n 个元素</li><li>limit(n) 用在 skip(m) 前面时，先返回前 n 个元素再在剩余的 n 个元素中去除 m 个元素</li></ul><div class="language- extra-class"><pre class="language-text"><code>list = list.stream()
+            .limit(2)
+            .skip(1)
+            .collect(toList());
+</code></pre></div><p>打印输出 [Person{name='mike', age=25}]</p><ol start="7"><li>map(T -&gt; R)
+将流中的每一个元素 T 映射为 R（类似类型转换）</li></ol><div class="language- extra-class"><pre class="language-text"><code>List&lt;String&gt; newlist = 
+list.stream().map(Person::getName).collect(toList());
+</code></pre></div><p>newlist 里面的元素为 list 中每一个 Person 对象的 name 变量</p><ol start="8"><li>flatMap(T -&gt; Stream)
+将流中的每一个元素 T 映射为一个流，再把每一个流连接成为一个流</li></ol><div class="language- extra-class"><pre class="language-text"><code>List&lt;String&gt; list = new ArrayList&lt;&gt;();
+list.add(&quot;aaa bbb ccc&quot;);
+list.add(&quot;ddd eee fff&quot;);
+list.add(&quot;ggg hhh iii&quot;);
+list = list.stream().map(s -&gt; s.split(&quot; &quot;)).
+flatMap(Arrays::stream).collect(toList());
+</code></pre></div><p>上面例子中，我们的目的是把 List 中每个字符串元素以&quot; &quot;分割开，变成一个新的 List。</p><p>首先 map 方法分割每个字符串元素，但此时流的类型为 Stream，因为 split 方法返回的是 String[ ] 类型；所以我们需要使用 flatMap 方法，先使用Arrays::stream将每个 String[ ] 元素变成一个 Stream流，然后 flatMap 会将每一个流连接成为一个流，最终返回我们需要的 Stream</p><ol start="9"><li>anyMatch(T -&gt; boolean)
+流中是否有一个元素匹配给定的 T -&gt; boolean 条件
+是否存在一个 person 对象的 age 等于 20：</li></ol><div class="language- extra-class"><pre class="language-text"><code>boolean b = list.stream().anyMatch(person -&gt; person.getAge() == 20);
+</code></pre></div><ol start="10"><li><p>allMatch(T -&gt; boolean)
+流中是否所有元素都匹配给定的 T -&gt; boolean 条件</p></li><li><p>noneMatch(T -&gt; boolean)
+流中是否没有元素匹配给定的 T -&gt; boolean 条件</p></li><li><p>findAny() 和 findFirst()</p></li></ol><ul><li>findAny()：找到其中一个元素 （使用 stream() 时找到的是第一个元素；使用 parallelStream() 并行时找到的是其中一个元素）</li><li>findFirst()：找到第一个元素</li></ul><p>值得注意的是，这两个方法返回的是一个 Optional对象，它是一个容器类，能代表一个值存在或不存在，这个后面会讲到</p><ol start="13"><li>reduce((T, T) -&gt; T) 和 reduce(T, (T, T) -&gt; T)
+用于组合流中的元素，如求和，求积，求最大值等
+计算年龄总和：
+int sum = list.stream().map(Person::getAge).reduce(0, (a, b) -&gt; a + b);
+与之相同:
+int sum = list.stream().map(Person::getAge).reduce(0, Integer::sum);
+其中，reduce 第一个参数 0 代表起始值为 0，lambda (a, b) -&gt; a + b 即将两值相加产生一个新值。</li></ol><p>同样地：
+计算年龄总乘积：
+int sum = list.stream().map(Person::getAge).reduce(1, (a, b) -&gt; a * b);</p><p>当然也可以</p><div class="language- extra-class"><pre class="language-text"><code>Optional&lt;Integer&gt; sum = list.stream().map(Person::getAge).reduce(Integer::sum);
+</code></pre></div><p>即不接受任何起始值，但因为没有初始值，需要考虑结果可能不存在的情况，因此返回的是 Optional 类型。</p><ol start="13"><li><p>count()
+返回流中元素个数，结果为 long 类型</p></li><li><p>collect()
+收集方法，我们很常用的是 collect(toList())，当然还有 collect(toSet()) 等，参数是一个收集器接口，这个后面会另外讲。</p></li><li><p>forEach()
+返回结果为 void，很明显我们可以通过它来干什么了，比方说：</p></li><li><p>unordered()还有这个比较不起眼的方法，
+返回一个等效的无序流，当然如果流本身就是无序的话，那可能就会直接返回其本身</p></li></ol><p>打印各个元素：
+list.stream().forEach(System.out::println);</p><p>再比如说 MyBatis 里面访问数据库的 mapper 方法：
+向数据库插入新元素：
+list.stream().forEach(PersonMapper::insertPerson);</p></div><div class="page-edit"><div class="edit-link"><a href="https://github.com/Aichaellee/aichaellee.github.io/edit/master/docs/java/java-stream.md" target="_blank" rel="noopener noreferrer">申请修改此页</a><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path><polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg></div><div class="last-updated"><span class="prefix">上次更新: </span><span class="time">9/13/2018, 9:56:36 AM</span></div></div><div class="page-nav"><p class="inner"><span class="prev">
+        ← <a href="/doc/java/java-interview.html" class="prev">
+          面试题
+        </a></span><span class="next"><a href="/doc/java/http-related.html">
+          网络相关
+        </a> →
+      </span></p></div></div></div></div>
+    <script src="/doc/assets/js/20.943cba34.js" defer></script><script src="/doc/assets/js/app.68d168ff.js" defer></script>
+  </body>
+</html>
