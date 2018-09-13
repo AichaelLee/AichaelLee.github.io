@@ -1,5 +1,5 @@
 module.exports = {
-    base: '/aichaellee.github.io/',
+    base: '/doc/',
     dest: 'dist',
     title: '总结文档',
     description: '学习总结',
@@ -24,7 +24,7 @@ module.exports = {
         nav: [
             {
                 text: '个人博客',
-                link: 'https://coding.imooc.com/class/228.html'
+                link: 'www.aichaellee.com'
             }
         ],
         sidebar: [
@@ -76,7 +76,7 @@ module.exports = {
                 title: 'AWS',
                 collapsable: false,
                 children: [
-                    ['compile/', 'Introduction']
+                    ['fronted/vue-interview', 'Introduction']
                     
                 ]
             },
