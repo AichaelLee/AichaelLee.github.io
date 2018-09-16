@@ -1,7 +1,7 @@
 module.exports = {
     base: '/doc/',
     dest: 'dist',
-    title: '总结文档',
+    title: 'aichaellee doc',
     description: '学习总结',
     head: [
         ['link', { rel: 'icon', href: `/logo.png` }],
@@ -87,7 +87,8 @@ module.exports = {
                     ['java/java-interview', '面试题'],
                     ['java/java-stream', '流操作'],
                     ['java/http-related','网络相关'],
-                    ['java/mybatis-related','mybatis']
+                    ['java/mybatis-related','mybatis'],
+                    ['java/springboot-applicatinContext','springboot获取应用上下文']
                     
                 ]
             }
